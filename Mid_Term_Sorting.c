@@ -97,7 +97,8 @@ Queue* createQue(int size) {
 
 bool enque(Queue* queue, int ele) {
 	if (queue->cur < queue->max) {
-		queue->data[queue->head++] = ele;
+		queue->data[queue->head] = ele;
+		queue->head = (queue->head + 1) % queue->max;
 		queue->cur++;
 		return true;
 	}
@@ -185,7 +186,6 @@ typedef struct __Node {
 }Node;
 
 typedef struct __List {
-	int num;
 	Node* head;
 }List;
 
