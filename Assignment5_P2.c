@@ -151,7 +151,6 @@ int main(void) {
 			}
 			puts("");
 		}
-
 	}
 
 	//free all the allocated ptr
