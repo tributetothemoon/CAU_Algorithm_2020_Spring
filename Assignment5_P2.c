@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define MIN(a,b) (((a) < (b) ? (a) : (b)))
 #define INVALID 2147483647
 
 //to remember all the pointer that should be freed
@@ -74,7 +73,7 @@ int main(void) {
 		for (int i = 0; i < d[n]; i++) {
 			mat[n][i] = (int*)my_malloc(sizeof(int) * d[n + 1]);	//generate columns
 			for (int j = 0; j < d[n + 1]; j++) {
-				mat[n][i][j] = rand() % 10;	//random number
+				mat[n][i][j] = rand() % 5;	//random number
 				printf("%d ", mat[n][i][j]);
 			}
 			puts("");
