@@ -157,13 +157,11 @@ int main(void) {
 	//free all the allocated ptr
 	List* node = head;
 	List* temp;
-	int count = 0;
 	while (node) {
 		temp = node->next;
 		free(node->pointer);
 		free(node);
 		node = temp;
-		count++;
 	}
 
 	return 0;
