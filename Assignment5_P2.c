@@ -28,8 +28,8 @@ int main(void) {
 	int d[4];	//dimensions
 	d[0] = 5;
 	d[3] = 10;
-	int cost[4][4];	//required computation number
-	for (int i = 0; i < 4; i++) cost[i][i] = 0;
+	int cost[3][3];	//required computation number
+	for (int i = 0; i < 3; i++) cost[i][i] = 0;
 
 	printf("A sequence of dimensions of matrices < 5, d1, d2, 10>\n");
 	printf("input d1 : ");
@@ -41,7 +41,7 @@ int main(void) {
 	int optimal_chain = 0;
 
 	//find smallest computation from Ai to Aj
-	for (int dia = 1; dia < 3; dia++) {
+	for (int dia = 1; dia < 3; dia++) {	//dia means diagonal
 		int i = 0;	//i = 0 ~ 2
 		int j = i + dia;	//j = 1 ~ 2
 		while (j < 3) {
@@ -151,6 +151,7 @@ int main(void) {
 			}
 			puts("");
 		}
+
 	}
 
 	//free all the allocated ptr

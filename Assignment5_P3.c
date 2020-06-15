@@ -26,6 +26,29 @@ int compare(const void* _a, const void* _b) {
 	return unit_value_b - unit_value_a;
 }
 
+int total_value;
+void c(int index, int bag_size, Item* arr[], int arr_size) {
+
+	if (arr[index]->weight <= bag_size) {
+		printf("Item %d\n", arr[index]->num);
+		printf("Weight : %d\n", arr[index]->weight);
+		printf("Value : %d\n", arr[index]->value);
+		printf("Fractional number : %d/%d\n\n", 1, 1);
+		total_value += arr[index]->value;
+		
+		if (index < arr_size) c(index + 1, bag_size - arr[index]->weight, arr, arr_size);	//recursively call
+		else return;	//index out of range
+	}
+	else {	//when item needs to be broken up
+		printf("Item %d(fractionized)\n", arr[index]->num);
+		printf("Weight : %d\n", bag_size);
+		printf("Value : %d\n", (arr[index]->value) / (arr[index]->weight) * bag_size);
+		printf("Fractional number : %d/%d\n\n", bag_size, arr[index]->weight);
+		total_value += (arr[index]->value) / (arr[index]->weight) * bag_size;
+		return;
+	}
+}
+
 void fractional_knapsack(Item* arr[], int arr_size, int bag_size) {
 
 	printf("[Sorting]\n");
@@ -36,31 +59,12 @@ void fractional_knapsack(Item* arr[], int arr_size, int bag_size) {
 		printf("Item %d, value per unit is %d\n", arr[i]->num, (arr[i]->value) / (arr[i]->weight));
 	}
 
-	int total_value = 0;
 	printf("\n[Fractional Knapsack Problem]\n");
 	printf("List of items in the bag...\n\n");
 
-	for (int i = 0; 0 < bag_size && i < arr_size; i++) {
-		if (arr[i]->weight <= bag_size) {
-			printf("Item %d\n", arr[i]->num);
-			printf("Weight : %d\n", arr[i]->num);
-			printf("Value : %d\n", arr[i]->value);
-			printf("Fractional number : %d/%d\n\n", 1, 1);
-			bag_size -= arr[i]->weight;
-			total_value += arr[i]->value;
-		}
-		else {
-			printf("Item %d(fractionized)\n", arr[i]->num);
-			printf("Weight : %d\n", bag_size);
-			printf("Value : %d\n", (arr[i]->value) / (arr[i]->weight) * bag_size);
-			printf("Fractional number : %d/%d\n\n", bag_size, arr[i]->weight);
-			total_value += (arr[i]->value) / (arr[i]->weight) * bag_size;
-			break;
-		}
-	}
+	c(0, bag_size, arr, arr_size);
 	
 	printf("Total value of items in the bag : %d\n", total_value);
-
 }
 
 int main(void) {
