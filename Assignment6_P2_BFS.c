@@ -10,7 +10,7 @@ typedef struct __Queue {
 	int num;
 	int	head;
 	int tail;
-	int* data;
+	vertex* data;
 }Queue;
 
 Queue* createQue(int size) {
@@ -19,7 +19,7 @@ Queue* createQue(int size) {
 	queue->max = size;
 	queue->head = 0;
 	queue->tail = 0;
-	queue->data = (int*)malloc(sizeof(int) * size);
+	queue->data = (vertex*)malloc(sizeof(vertex) * size);
 	return queue;
 }
 
@@ -35,7 +35,7 @@ bool enque(Queue* queue, vertex ele) {
 
 vertex deque(Queue* queue) {
 	if (0 < queue->num) {
-		int result = queue->data[queue->tail];
+		vertex result = queue->data[queue->tail];
 		queue->tail = (queue->tail + 1) % queue->max;
 		queue->num--;
 		return result;
@@ -52,9 +52,8 @@ void terminateQueue(Queue* queue) {
 	free(queue);
 }
 
-
 bool connected[8][8];
-bool visit[8];//visit[i] means vertex[i] has been visit
+bool visit[8];	//visit[i] means vertex[i] has been visit
 int dist[8];	//dist[i] means distance 0 to i
 vertex pie[8];	//pie[i] returns i's predecessor number
 
@@ -86,10 +85,11 @@ int main(void) {
 
 	while (isNotEmpty(queue)) {
 		vertex cur = deque(queue);
+
 		printf("[Vertex %c]\n", vertex_name[cur]);
 		printf("d = %d\n", dist[cur]);
-		if(cur != s) printf("Predecessor Vertex = %c\n", vertex_name[pie[cur]]);	//No Predecessor for starting vertex s
-		puts("");
+		if(cur != s) printf("Predecessor Vertex = %c\n\n", vertex_name[pie[cur]]);	//No Predecessor for starting vertex s
+		
 		for (vertex i = s; i <= r; i++) {
 			if (connected[cur][i] && !visit[i]) {
 				visit[i] = true;	//visit vertex i
