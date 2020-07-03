@@ -7,10 +7,13 @@ int main(void) {
 	printf("input n : ");
 	scanf("%d", &n);
 
-	if (n < 0) exit(1);
+	if (n < 0) {
+		printf("The input n should be positive number");
+		return 0;
+	}
 
 	else if (n == 0 || n == 1) {	//when input n is 0 or 1
-		printf("Fn = 1\n");
+		printf("Fn = %d\n", n);
 		return 0;
 	}
 
